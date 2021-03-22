@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<style>
+		#screen {
+			position: relative;
+			width: 500px;
+			height: 500px;
+		}
+	</style>
+</head>
+<body>
+	<div id="screen"></div>
+	<script>
+
+		/**
+		 * 创建蛇身的类
+		 * 以第一个单元为蛇头
+		 */
+		class SnakeBody {	
+			constructor(container) {
+				this.container = container;
+				this.body;		// 本对象对应的此单元
+				this.posX;		// 此单元初始位置的X坐标
+				this.posY;		// 此单元初始位置的Y坐标
+				this.nextX;		// 此单元移动后位置的X坐标
+				this.nextY;		// 此单元移动后位置的Y坐标
+				this.createBody();
+			}
+
+			init () {
+				this.setPos();
+			}
+ 
+			setPos () {
+				this.body.style.left = this.posX + 'px';
+				this.body.style.top  = this.posY + 'px';
+			}
+
+			move () {
+				this.posX = this.nextX;
+				this.posY = this.nextY;
+				this.setPos()
+			}
+
+			createBody () { // 创建蛇身的一个单元
+				this.body = document.createElement('div');
+				this.body.style.position = 'absolute';
+				this.body.style.width = '10px';
+				this.body.style.height = '10px';
+				this.body.style.left = '0px';
+				this.body.style.top = '0px';
+				this.body.style.backgroundColor = '#000'
+				document.querySelector(this.container).appendChild(this.body);
+			}
+			
+		}
+
+		class Snake {
+
+			constructor (container) {
+				this.container = container;	// 存放蛇所在的容器ID
+				this.bodys = [];			// 存放蛇身所有单元的数组
+				this.firstX = 100;			// 蛇头初始位置的X坐标
+				this.firstY = 300;			// 蛇头初始位置的Y坐标
+				this.direction = 'up';		// 蛇头移动的方向
+				this.firstSize = 20;			// 蛇身的初始大小
+				this.size;					// 蛇身长度
+				this.bodyWidth;				// 蛇身每个单元的宽度
+				this.init();				// 运行初始化方法
+			}
+
+			init () {
+				this.craeteSnake();
+				for (let i = 0;i < this.bodys.length;i++) {
+					this.bodys[i].init();
+				}
+			}
+
+			growth () {	// 蛇每次碰撞食物都会变长
+				let _x = this.bodys[0].body.offsetLeft;
+				let _y = this.bodys[0].body.offsetTop;
+				switch (this.direction) {
+					case 'top': _y -= this.bodyWidth; break;
+					case 'down': _y += this.bodyWidth; break;
+					case 'left': _x  -= this.bodyWidth; break;
+					case 'right': _x += this.bodyWidth; break;
+				}
+				let sb = new SnakeBody(this.container);
+				sb.posX = _x;
+				sb.posY = _y;
+				switch (this.direction) {
+					case 'top': _y -= this.bodyWidth; break;
+					case 'down': _y += this.bodyWidth; break;
+					case 'left': _x  -= this.bodyWidth; break;
+					case 'right': _x += this.bodyWidth; break;
+				}
+				sb.nextX = _x;
+				sb.nextY = _y;
+				sb.setPos();
+				this.bodys.unshift(sb);
+				this.updateSnake();
+			}
+
+			changeDirection (dir) {	// 改变蛇头的移动方向
+				this.direction = dir;
+			}
+
+			updateSnake () {
+				for (let i = this.bodys.length - 1; i > 0;i--) {
+					this.bodys[i].nextX = this.bodys[i - 1].posX;
+					this.bodys[i].nextY = this.bodys[i - 1].posY;
+				}
+			}
+
+			craeteSnake () {	// 创建一条小蛇
+				
+				for (let i = 0;i < this.firstSize;i++) {
+					this.bodys.push(new SnakeBody(this.container));
+				}
+
+				this.bodyWidth = this.bodys[0].body.style.width.substring(0,2)*1;
+
+				// 设置蛇的初始位置
+				this.bodys[0].posX  = this.firstX;
+				this.bodys[0].posY  = this.firstY;
+				this.bodys[0].nextX = this.firstX;
+				this.bodys[0].nextY = this.firstY + this.bodyWidth
+				for (let i = 1;i < this.bodys.length;i++ ) {
+					this.bodys[i].posX = this.bodys[i - 1].posX;
+					this.bodys[i].posY = this.bodys[i - 1].posY + this.bodyWidth;
+				}
+				this.updateSnake();
+			}
+
+			move () {
+				switch (this.direction) {	// 控制蛇头移动方向
+					case 'up': this.bodys[0].nextY = this.bodys[0].posY - this.bodyWidth;break;
+					case 'down': this.bodys[0].nextY = this.bodys[0].posY + this.bodyWidth;break;
+					case 'left': this.bodys[0].nextX = this.bodys[0].posX - this.bodyWidth;break;
+					case 'right': this.bodys[0].nextX = this.bodys[0].posX +this.bodyWidth;break;
+				}
+				// 蛇身的其余单元紧跟着其前面的一个单元
+				for (let i = this.bodys.length - 1; i > 0;i--) {
+					this.bodys[i].nextX = this.bodys[i - 1].posX;
+					this.bodys[i].nextY = this.bodys[i - 1].posY;
+				}
+				for (let i =0;i < this.bodys.length;i++) {
+					this.bodys[i].move();
+				}
+			}
+		}
+
+		class SnakeFood {
+			constructor (container) {
+				this.container = container;// 容器
+				this.food;			// 代表蛇食的元素
+				this.posX;			// 蛇食的X坐标
+				this.posY;			// 蛇食的Y坐标
+				this.init();
+			}
+
+			init () {
+				this.createFood ();
+				this.initFoodPos();
+			}
+
+			initFoodPos () { // 随机生成蛇食的位置
+				let _x = parseInt(Math.random()*500);
+				let _y = parseInt(Math.random()*500);
+				this.posX = _x;
+				this.posY = _y;
+				this.setPos();
+			}
+
+			setPos () {
+				this.food.style.left = this.posX + 'px';
+				this.food.style.top  = this.posY + 'px';
+			}
+
+			createFood () {
+				this.food = document.createElement('div');
+				this.food.style.position = 'absolute';
+				this.food.style.width = '10px';
+				this.food.style.height = '10px';
+				this.food.style.left = '0px';
+				this.food.style.top = '0px';
+				this.food.style.backgroundColor = '#f00';
+				this.food.style.borderRadius = '50%';
+				document.querySelector(this.container).appendChild(this.food);
+			}
+		}
+
+		var snake = new Snake('#screen');
+		var food = new SnakeFood('#screen');
+
+		// 控制蛇头移动方向的事件，不能反方向
+		document.onkeyup = function eventHandle (e) {
+			var e = e || window.event;
+			var dir = snake.direction;
+			switch (e.keyCode) {
+				// 向左
+				case 37: if (dir == 'right') return; snake.changeDirection('left');break;
+				// 向上
+				case 38: if (dir == 'down') return; snake.changeDirection('up');break;
+				// 向右
+				case 39: if (dir == 'left') return; snake.changeDirection('right');break;
+				// 向下
+				case 40: if (dir == 'up') return; snake.changeDirection('down');break;
+			}
+		}
+
+		// 测试碰撞
+		function checkCollision (el1,el2) {
+			let w = el1.style.width.substring(0,2)*1/2;
+			// el1 的中心坐标
+			let x1 = el1.offsetLeft + w;
+			let y1 = el1.offsetTop + w;
+			// el2 的中心坐标
+			let x2 = el2.offsetLeft + w;
+			let y2 = el2.offsetTop + w;
+			if (Math.abs(x1 - x2) < w * 2 && 
+					Math.abs(y1 - y2) < w * 2) {
+				return true;
+			}
+			return false;
+		}
+
+		var t = setInterval(function () {
+			for (let i = 2;i < snake.bodys.length - 1;i++) {
+				if(checkCollision(snake.bodys[0].body,snake.bodys[i].body)) {
+					clearInterval(t);
+					alert('游戏结束！');
+					return;
+				}
+			}
+			snake.move();
+			if(checkCollision(snake.bodys[0].body,food.food)) {
+				snake.growth();
+				food.initFoodPos();
+			}
+		},100)
+
+	</script>
+</body>
+</html>

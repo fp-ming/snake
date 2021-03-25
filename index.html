@@ -53,6 +53,7 @@
 				this.body.style.left = '0px';
 				this.body.style.top = '0px';
 				this.body.style.backgroundColor = '#000'
+				this.body.style.borderRadius = '50%'
 				document.querySelector(this.container).appendChild(this.body);
 			}
 			
@@ -105,6 +106,11 @@
 			}
 
 			changeDirection (dir) {	// 改变蛇头的移动方向
+				if(this.direction == dir) return;
+				if(this.direction == 'left' && dir == 'right') return;
+				if(this.direction == 'right' && dir == 'left') return;
+				if(this.direction == 'top' && dir == 'bottom') return;
+				if(this.direction == 'bottom' && dir == 'top') return;
 				this.direction = dir;
 			}
 
@@ -137,9 +143,9 @@
 
 			move () {
 				switch (this.direction) {	// 控制蛇头移动方向
-					case 'up': this.bodys[0].nextY = this.bodys[0].posY - this.bodyWidth;break;
-					case 'down': this.bodys[0].nextY = this.bodys[0].posY + this.bodyWidth;break;
-					case 'left': this.bodys[0].nextX = this.bodys[0].posX - this.bodyWidth;break;
+					case 'up'   : this.bodys[0].nextY = this.bodys[0].posY - this.bodyWidth;break;
+					case 'down' : this.bodys[0].nextY = this.bodys[0].posY + this.bodyWidth;break;
+					case 'left' : this.bodys[0].nextX = this.bodys[0].posX - this.bodyWidth;break;
 					case 'right': this.bodys[0].nextX = this.bodys[0].posX +this.bodyWidth;break;
 				}
 				// 蛇身的其余单元紧跟着其前面的一个单元
@@ -202,13 +208,13 @@
 			var dir = snake.direction;
 			switch (e.keyCode) {
 				// 向左
-				case 37: if (dir == 'right') return; snake.changeDirection('left');break;
+				case 37: snake.changeDirection('left');break;
 				// 向上
-				case 38: if (dir == 'down') return; snake.changeDirection('up');break;
+				case 38: snake.changeDirection('up');break;
 				// 向右
-				case 39: if (dir == 'left') return; snake.changeDirection('right');break;
+				case 39: snake.changeDirection('right');break;
 				// 向下
-				case 40: if (dir == 'up') return; snake.changeDirection('down');break;
+				case 40: snake.changeDirection('down');break;
 			}
 		}
 

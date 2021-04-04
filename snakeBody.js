@@ -31,8 +31,8 @@ class SnakeBody {
 	createBody () { // 创建蛇身的一个单元
 		this.body = document.createElement('div');
 		this.body.style.position = 'absolute';
-		this.body.style.width = '10px';
-		this.body.style.height = '10px';
+		this.body.style.width = '50x';
+		this.body.style.height = '50x';
 		this.body.style.left = '0px';
 		this.body.style.top = '0px';
 		this.body.style.backgroundColor = '#000'

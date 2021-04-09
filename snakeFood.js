@@ -1,39 +1,26 @@
-class SnakeFood {
-			constructor (container) {
-				this.container = container;// 容器
-				this.food;			// 代表蛇食的元素
-				this.posX;			// 蛇食的X坐标
-				this.posY;			// 蛇食的Y坐标
-				this.init();
-			}
+/**
+*	此文件用以初始化和实时改变蛇食的位置
+*/
+const snakeFood = document.getElementById('snake_food');
+const screen = document.getElementById('screen');
 
-			init () {
-				this.createFood ();
-				this.initFoodPos();
-			}
+// 获取元素属性
+function elAttr (el) {
+	const element = {
+		width: 	el.clientWidth, 
+		height: el.clientHeight,
+		posX: 	el.offsetLeft,
+		posY: 	el.offsetTop
+	}
 
-			initFoodPos () { // 随机生成蛇食的位置
-				let _x = parseInt(Math.random()*500);
-				let _y = parseInt(Math.random()*500);
-				this.posX = _x;
-				this.posY = _y;
-				this.setPos();
-			}
+	return element;
+}
 
-			setPos () {
-				this.food.style.left = this.posX + 'px';
-				this.food.style.top  = this.posY + 'px';
-			}
+function changePos (snakeFood,screen) {
+	let _x = Math.ceil(Math.random()*(elAttr(screen).width - elAttr(snakeFood).width));
+	let _y = Math.ceil(Math.random()*(elAttr(screen).height - elAttr(snakeFood).height));
+	snakeFood.style.left = _x + 'px';
+	snakeFood.style.top = _y + 'px';
+}
 
-			createFood () {
-				this.food = document.createElement('div');
-				this.food.style.position = 'absolute';
-				this.food.style.width = '10px';
-				this.food.style.height = '10px';
-				this.food.style.left = '0px';
-				this.food.style.top = '0px';
-				this.food.style.backgroundColor = '#f00';
-				this.food.style.borderRadius = '50%';
-				document.querySelector(this.container).appendChild(this.food);
-			}
-		}
+changePos (snakeFood,screen)

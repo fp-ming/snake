@@ -16,6 +16,29 @@
 			border-radius: 50%;
 			background-color: #f00;
 		}
+		#snake_food {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #f00;
+			animation: snake-food 1s infinite alternate;
+			-webkit-animation:snake-food 1s infinite alternate;
+		}
+		@keyframes snake-food {
+			0% {
+				width: 10px;
+				height: 10px;
+				transform: translate(0,0);
+				-webkit-transform: translate(0,0);
+			}
+			100% {
+				width: 20px;
+				height: 20px;
+				transform: translate(-25%,-25%);
+				-webkit-transform: translate(-25%,-25%);
+			}
+		}
 	</style>
 </head>
 <body>

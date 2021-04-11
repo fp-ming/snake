@@ -6,16 +6,13 @@ class Snake {
 		this.firstX;			// 蛇头初始位置的X坐标
 		this.firstY;			// 蛇头初始位置的Y坐标
 		this.direction = 'up';		// 蛇头移动的方向
-		this.firstSize = 3;		// 蛇身的初始大小
+		this.firstSize = 5;		// 蛇身的初始大小
 		this.size;			// 蛇身长度
 		this.bodyWidth;			// 蛇身每个单元的宽度
 		this.init();			// 运行初始化方法
 	}
 
 	init () {
-		// 定义小蛇的初始位置
-		this.firstX = document.querySelector(this.container).clientWidth / 3;
-		this.firstY = document.querySelector(this.container).clientHeight / 3;
 		// 创建一条小蛇
 		this.craeteSnake();
 

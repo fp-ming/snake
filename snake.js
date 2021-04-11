@@ -13,6 +13,7 @@ class Snake {
 	}
 
 	init () {
+		// 定义小蛇的初始位置
 		this.firstX = document.querySelector(this.container).clientWidth / 3;
 		this.firstY = document.querySelector(this.container).clientHeight / 3;
 		

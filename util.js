@@ -87,3 +87,45 @@ function gameOver () {
 	return;
 }
 
+// 控制事件的函数
+function eventHandle (event) {
+	// 考虑兼容性
+	const e = event || window.event;
+	const key = e.keyCode || e.target.getAttribute('dir') || e.srcElement.getAttribute('dir');
+	changeDirection(key*1);
+
+}
+
+// 控制蛇头移动方向的函数，不能反方向
+function changeDirection (keyCode) {
+	if (press_disable) return;
+	const dir = snake.direction
+	press_disable = true;
+	switch (keyCode) {
+		// 向左
+		case 37: 
+			if(dir == 'right') return;
+			snake.changeDirection('left');break;
+
+		// 向上
+		case 38: 
+			if(dir == 'down') return;
+			snake.changeDirection('up');break;
+
+		// 向右
+		case 39: 
+			if(dir == 'left') return;
+			snake.changeDirection('right');break;
+		
+		// 向下
+		case 40: 
+			if(dir == 'up') return;
+			snake.changeDirection('down');break;
+
+		// 暂停
+		case 80: pause();break;
+
+		// 结束游戏
+		case 81: gameOver();break;
+	}
+}

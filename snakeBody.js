@@ -22,10 +22,10 @@ class SnakeBody {
 		this.body.style.top  = this.posY + 'px';
 	}
 
-	move () {
+	move () {	// 移动蛇身的方法
 		this.posX = this.nextX;
 		this.posY = this.nextY;
-		this.setPos()
+		this.setPos();
 	}
 
 	createBody () { // 创建蛇身的一个单元

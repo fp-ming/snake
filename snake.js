@@ -13,6 +13,9 @@ class Snake {
 	}
 
 	init () {
+		this.firstX = document.querySelector(this.container).clientWidth / 3;
+		this.firstY = document.querySelector(this.container).clientHeight / 3;
+		
 		// 创建一条小蛇
 		this.craeteSnake();
 

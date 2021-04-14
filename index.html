@@ -15,10 +15,16 @@
 		}
 		#btn_wrapper {
 			position: relative;
+			width: 100%;
+			height: 120px;
+		}
+		#dir {
+			position: absolute;
+			top: 0;
+			right: 20px;
 			display: block;
 			width: 120px;
 			height: 120px;
-			margin: 0 auto;
 			display: none;
 		}
 		button {
@@ -52,6 +58,11 @@
 				overflow: hidden;
 			}
 			#btn_wrapper {
+				position: relative;
+				width: 100%;
+				height: 120px;
+			}
+			#dir {
 				position: relative;
 				display: block;
 				width: 200px;
@@ -101,6 +112,21 @@
 				-webkit-transform: translate(-25%,-25%);
 			}
 		}
+		#fast {
+			position: absolute;
+			top: 0;
+			left: 20px;
+			width: 60px;
+			height: 100%;
+			passing: 10px 0;
+		}
+		#fast button {
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+			passing: 10px 0;
+			border-radius: 10px;
+		}
 		.snake-body {
 			position: absolute;
 			width: 10px;
@@ -114,12 +140,15 @@
 	<div id="container">
 		<div id="snake_food"></div>
 	</div>
-
+	
 	<div id="btn_wrapper">
-		<button id="left" dir="37">&lt;</button>
-		<button id="right" dir="39">&lt;</button>
-		<button id="up" dir="38">&lt;</button>
-		<button id="down" dir="40">&lt;</button>
+		<div id="fast"><button></button></div>
+		<div id="dir">
+			<button id="left" dir="37">&lt;</button>
+			<button id="right" dir="39">&lt;</button>
+			<button id="up" dir="38">&lt;</button>
+			<button id="down" dir="40">&lt;</button>
+		</div>
 	</div>
 
 

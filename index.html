@@ -20,11 +20,24 @@
 			margin: 0 auto;
 			display: none;
 		}
+		#fast {
+			position: absolute;
+			top: 0;
+			left: 20px;
+			width: 40px;
+			height: 100%;
+			margin: 15px 0;
+		}
+		#fast button {
+			width: 100%;
+			height: 80%;
+			border-radius: 30px;
+			transform: rotate(-25deg);
+		}
 		#dir {
 			position: absolute;
 			top: 0;
 			right: 20px;
-			display: block;
 			width: 120px;
 			height: 120px;
 		}
@@ -62,16 +75,20 @@
 				position: relative;
 				width: 80%;
 				height: 200px;
-				height: 120px;
 				display: block;
+			}
+			#fast {
+				position: absolute;
+				top: 0;
+				left: 60px;
+				width: 80px;
 			}
 			#dir {
 				position: absolute;
 				top: 0;
-				right: 20px;
+				right: 40px;
 				width: 200px;
 				height: 100%;
-				margin: 0 auto;
 			}
 			button {
 				position: absolute;
@@ -115,22 +132,6 @@
 				transform: translate(-25%,-25%);
 				-webkit-transform: translate(-25%,-25%);
 			}
-		}
-		#fast {
-			position: absolute;
-			top: 0;
-			left: 20px;
-			width: 40px;
-			height: 100%;
-			passing: 10px 0;
-		}
-		#fast button {
-			width: 100%;
-			height: 100%;
-			box-sizing: border-box;
-			passing: 10px 0;
-			border-radius: 10px;
-			transform: rotate(30deg);
 		}
 		.snake-body {
 			position: absolute;

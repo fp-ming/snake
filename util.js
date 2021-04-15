@@ -131,7 +131,13 @@ function changeDirection (keyCode) {
 }
 
 // 加快速度
-function fastEvent () {
+function fastEvent (e) {
+	clearInterval(t);
 	t = null;
-	timeout(500);
+	if(e.type == 'mousedown'){
+		timeout(500);
+	} else {
+		timeout(1000);
+	}
+	
 }

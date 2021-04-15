@@ -87,7 +87,7 @@ function gameOver () {
 	return;
 }
 
-// 控制事件的函数
+// 控制蛇头方向事件的函数
 function eventHandle (event) {
 	// 考虑兼容性
 	const e = event || window.event;
@@ -128,4 +128,10 @@ function changeDirection (keyCode) {
 		// 结束游戏
 		case 81: gameOver();break;
 	}
+}
+
+// 加快速度
+function fastEvent () {
+	t = null;
+	timeout(500);
 }

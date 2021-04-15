@@ -7,21 +7,25 @@ const snakeFood = document.getElementById('snake_food');
 const container = document.getElementById('container');
 changePos (snakeFood,container);
 
-// 点击事件
+// 获得元素节点
 const left = document.getElementById('left');
 const right = document.getElementById('right');
 const up = document.getElementById('up');
 const down = document.getElementById('down');
+const fast = document.getElementById('fast');
+// 绑定事件，兼容IE
 if(document.addEventListener) {
 	left.addEventListener('click', eventHandle);
 	right.addEventListener('click', eventHandle);
 	up.addEventListener('click', eventHandle);
 	down.addEventListener('click', eventHandle);
+	fast.addEventLinster('onmousedown',fastEvent);
 } else {
 	left.attachEvent('click', eventHandle);
 	right.attachEvent('click', eventHandle);
 	up.attachEvent('click', eventHandle);
 	down.attachEvent('click', eventHandle);
+	fast.attachEvent('onmousedown',fastEvent);
 }
 
 

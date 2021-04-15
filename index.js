@@ -21,10 +21,10 @@ if(document.addEventListener) {
 	down.addEventListener('click', eventHandle);
 	fast.addEventLinster('mousedown',fastEvent);
 } else {
-	left.attachEvent('click', eventHandle);
-	right.attachEvent('click', eventHandle);
-	up.attachEvent('click', eventHandle);
-	down.attachEvent('click', eventHandle);
+	left.attachEvent('onclick', eventHandle);
+	right.attachEvent('onclick', eventHandle);
+	up.attachEvent('onclick', eventHandle);
+	down.attachEvent('onclick', eventHandle);
 	fast.attachEvent('onmousedown',fastEvent);
 }
 

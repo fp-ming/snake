@@ -7,4 +7,5 @@ function changePos (snakeFood,screen) {
 	let _y = Math.ceil(Math.random()*(elAttr(screen).height - elAttr(snakeFood).height) - 5)+ 5;
 	snakeFood.style.left = _x + 'px';
 	snakeFood.style.top = _y + 'px';
+	
 }

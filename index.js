@@ -42,3 +42,4 @@ timeout(1000);
 
 // 控制蛇头移动方向的事件，不能反方向
 document.onkeyup = eventHandle;
+

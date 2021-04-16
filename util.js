@@ -139,5 +139,4 @@ function fastEvent (e) {
 	} else {
 		timeout(1000);
 	}
-	
 }

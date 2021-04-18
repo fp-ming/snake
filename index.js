@@ -5,6 +5,7 @@
 // 初始化蛇食
 const snakeFood = document.getElementById('snake_food');
 const container = document.getElementById('container');
+// 设置蛇食的位置
 changePos (snakeFood,container);
 
 // 点击事件，兼容IE

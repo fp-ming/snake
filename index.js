@@ -7,7 +7,7 @@ const snakeFood = document.getElementById('snake_food');
 const container = document.getElementById('container');
 changePos (snakeFood,container);
 
-// 点击事件
+// 点击事件，兼容IE
 const left  = document.getElementById('left');
 const right = document.getElementById('right');
 const up    = document.getElementById('up');
